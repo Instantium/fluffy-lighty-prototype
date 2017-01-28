@@ -3,8 +3,11 @@ package com.fluffylighty.productscroller.controller;
 import android.util.Log;
 
 import com.fluffylighty.productscroller.events.InitialisationEvent;
+import com.fluffylighty.productscroller.events.PostListUpdatedEvent;
 import com.fluffylighty.productscroller.events.ProductListUpdatedEvent;
+import com.fluffylighty.productscroller.model.GetPostsResponse;
 import com.fluffylighty.productscroller.model.GetProductsResponse;
+import com.fluffylighty.productscroller.model.Post;
 import com.fluffylighty.productscroller.model.Product;
 import com.fluffylighty.productscroller.services.RestCallService;
 
@@ -15,7 +18,10 @@ import org.greenrobot.eventbus.ThreadMode;
 import retrofit2.Call;
 
 import static com.fluffylighty.productscroller.Utilities.Constants.CLOTHING_CATEGORY_ID;
+import static com.fluffylighty.productscroller.Utilities.Constants.FASHION_CATEGORY_NAME;
 import static com.fluffylighty.productscroller.Utilities.Constants.LAMP_CATEGORY_ID;
+import static com.fluffylighty.productscroller.Utilities.Constants.LIFESTYLE_CATEGORY_NAME;
+import static com.fluffylighty.productscroller.Utilities.Constants.POSTS_PAGE_ITEMS;
 import static com.fluffylighty.productscroller.Utilities.Constants.PRODUCTS_PAGE_ITEMS;
 
 /**
@@ -39,6 +45,23 @@ public class MainController {
 
         fetchProductsForCategoryId(CLOTHING_CATEGORY_ID);
         fetchProductsForCategoryId(LAMP_CATEGORY_ID);
+
+        fetchPostsForCategoryName(LIFESTYLE_CATEGORY_NAME);
+        fetchPostsForCategoryName(FASHION_CATEGORY_NAME);
+    }
+
+    private void fetchPostsForCategoryName(final String categoryName) {
+        Call<GetPostsResponse> call = RestCallService.getAPIInterface().getPostsForCategory(categoryName, POSTS_PAGE_ITEMS);
+
+        RestCallService.getProductsForCategoryId(call, new RestCallService.SuccessCallback<GetPostsResponse>() {
+            @Override
+            public void onSuccess(GetPostsResponse body) {
+
+                Post[] posts = body.getPosts();
+
+                EventBus.getDefault().postSticky(new PostListUpdatedEvent(categoryName, posts));
+            }
+        });
     }
 
     private void fetchProductsForCategoryId(final int categoryId) {

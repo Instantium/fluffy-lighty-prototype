@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.fluffylighty.productscroller.R;
 import com.fluffylighty.productscroller.Utilities.Utilities;
+import com.fluffylighty.productscroller.model.ImageInfo;
 import com.fluffylighty.productscroller.model.Product;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -56,14 +57,42 @@ public class HorizontalAdapter extends ArrayAdapter<Product> {
 
             holder.productPricingTextView.setText(priceTag);
 
-            //TODO check if image is available and use a fallback otherwise
-            String imageUrl = currentItem.getImages()[0].getUrl();
+            String imageUrl = getImageUrl(currentItem.getImages());
 
-            //TODO show placeholder image
-            ImageLoader.getInstance().displayImage(imageUrl, holder.productImageView);
+            if (imageUrl != null) {
+                //TODO show placeholder image
+                ImageLoader.getInstance().displayImage(imageUrl, holder.productImageView);
+            }
         }
 
         return convertView;
+    }
+
+    private String getImageUrl(ImageInfo[] imageInfos) {
+
+        if (imageInfos == null) {
+            return null;
+        }
+
+        String finalUrl = null;
+
+        for (ImageInfo imageInfo : imageInfos) {
+
+            String url = imageInfo.getUrl();
+            if (url != null && !url.isEmpty()) {
+
+                if (imageInfo.isPrimary()) {
+
+                    //If there is a Image marked as primary, this will be used instead of any other
+                    return url;
+                } else {
+
+                    finalUrl = url;
+                }
+            }
+        }
+
+        return finalUrl;
     }
 
     private class ViewHolder {

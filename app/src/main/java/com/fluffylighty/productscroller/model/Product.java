@@ -8,7 +8,7 @@ public class Product {
     private final Currency currency;
     private final String name;
     private final float price;
-    private final ImageInfos[] images;
+    private final ImageInfo[] images;
 
     /**
      * Dummy constructor as this Object will only be instantiated via gson
@@ -17,7 +17,7 @@ public class Product {
         currency = new Currency();
         name = "";
         price = 0;
-        images = new ImageInfos[0];
+        images = new ImageInfo[0];
     }
 
     public Currency getCurrency() {
@@ -32,7 +32,7 @@ public class Product {
         return price;
     }
 
-    public ImageInfos[] getImages() {
+    public ImageInfo[] getImages() {
         return images;
     }
 }
