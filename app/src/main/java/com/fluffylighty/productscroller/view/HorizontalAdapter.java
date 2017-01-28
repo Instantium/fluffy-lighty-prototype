@@ -9,18 +9,13 @@ import android.widget.ArrayAdapter;
 
 import com.fluffylighty.productscroller.R;
 
-import org.lucasr.twowayview.TwoWayView;
-
 /**
  * Created by Nico Adler on 28.01.17.
  */
-public class VerticalListAdapter extends ArrayAdapter<String> {
+public class HorizontalAdapter extends ArrayAdapter<String> {
 
-    private final String[] strings;
-
-    public VerticalListAdapter(Context context, String[] strings) {
+    public HorizontalAdapter(Context context, String[] strings) {
         super(context, -1, strings);
-        this.strings = strings;
     }
 
     @NonNull
@@ -30,12 +25,9 @@ public class VerticalListAdapter extends ArrayAdapter<String> {
         ViewHolder holder;
         if (convertView == null) {
 
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.vertical_listview_horizontal_listview_item, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.horizontal_listview_item, null);
 
             holder = new ViewHolder();
-            TwoWayView horizontalListView = (TwoWayView) convertView.findViewById(R.id.horizontal_listview);
-            ArrayAdapter<String> horizontalAdapter = new HorizontalAdapter(getContext(), strings);
-            horizontalListView.setAdapter(horizontalAdapter);
 
             convertView.setTag(holder);
         } else {
