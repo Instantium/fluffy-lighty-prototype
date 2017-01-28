@@ -8,19 +8,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.fluffylighty.productscroller.R;
+import com.fluffylighty.productscroller.model.Product;
+import com.fluffylighty.productscroller.model.VerticalListItemWrapper;
 
 import org.lucasr.twowayview.TwoWayView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Nico Adler on 28.01.17.
  */
-public class VerticalListAdapter extends ArrayAdapter<String> {
+public class VerticalListAdapter extends ArrayAdapter<VerticalListItemWrapper> {
 
-    private final String[] strings;
-
-    public VerticalListAdapter(Context context, String[] strings) {
-        super(context, -1, strings);
-        this.strings = strings;
+    public VerticalListAdapter(Context context, List<VerticalListItemWrapper> verticalListItemWrappers) {
+        super(context, -1, verticalListItemWrappers);
     }
 
     @NonNull
@@ -34,18 +37,28 @@ public class VerticalListAdapter extends ArrayAdapter<String> {
 
             holder = new ViewHolder();
             TwoWayView horizontalListView = (TwoWayView) convertView.findViewById(R.id.horizontal_listview);
-            ArrayAdapter<String> horizontalAdapter = new HorizontalAdapter(getContext(), strings);
-            horizontalListView.setAdapter(horizontalAdapter);
+            holder.productList = new ArrayList<>();
+            holder.horizontalAdapter = new HorizontalAdapter(getContext(), holder.productList);
+            horizontalListView.setAdapter(holder.horizontalAdapter);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        VerticalListItemWrapper item = getItem(position);
+        if (item != null) {
+
+            holder.productList.clear();
+            holder.productList.addAll(Arrays.asList(item.getProducts()));
+            holder.horizontalAdapter.notifyDataSetChanged();
+        }
 
         return convertView;
     }
 
     private class ViewHolder {
+        public HorizontalAdapter horizontalAdapter;
+        public ArrayList<Product> productList;
     }
 }

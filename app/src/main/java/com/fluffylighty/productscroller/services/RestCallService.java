@@ -12,8 +12,12 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static java.net.HttpURLConnection.HTTP_OK;
 
 /**
  * Created by Nico Adler on 28.01.17.
@@ -48,6 +52,32 @@ public class RestCallService {
         return retrofit.create(ApiInterface.class);
     }
 
+    public static <T> void getProductsForCategoryId(Call<T> call, final SuccessCallback<T> callback) {
+
+        retrofit2.Response<T> response = null;
+
+        call.enqueue(new Callback<T>() {
+            @Override
+            public void onResponse(Call<T> call, retrofit2.Response<T> response) {
+
+                if (response != null && response.code() == HTTP_OK) {
+
+                    T body = response.body();
+
+                    if (body != null) {
+
+                        callback.onSuccess(body);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<T> call, Throwable t) {
+
+            }
+        });
+    }
+
     /**
      * Creates a custom {@link OkHttpClient} with {@value X_LOCALE_HEADER_KEY} and {@value X_API_KEY_HEADER_KEY} as specified in the BuildConfig.
      *
@@ -73,5 +103,9 @@ public class RestCallService {
         });
 
         return httpClient.build();
+    }
+
+    public interface SuccessCallback<T> {
+        void onSuccess(T body);
     }
 }

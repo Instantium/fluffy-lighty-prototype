@@ -14,6 +14,12 @@ import org.junit.runner.RunWith;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import static com.fluffylighty.productscroller.Utilities.Constants.CLOTHING_CATEGORY_ID;
+import static com.fluffylighty.productscroller.Utilities.Constants.FASHION_CATEGORY_NAME;
+import static com.fluffylighty.productscroller.Utilities.Constants.LAMP_CATEGORY_ID;
+import static com.fluffylighty.productscroller.Utilities.Constants.LIFESTYLE_CATEGORY_NAME;
+import static com.fluffylighty.productscroller.Utilities.Constants.POSTS_PAGE_ITEMS;
+import static com.fluffylighty.productscroller.Utilities.Constants.PRODUCTS_PAGE_ITEMS;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -23,12 +29,6 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(AndroidJUnit4.class)
 public class RestCallServiceTest {
-
-    private static final int PAGE_ITEMS = 8;
-    private static final String FASHION_CATEGORY_NAME = "fashion";
-    private static final String LIFESTYLE_CATEGORY_NAME = "lifestyle";
-    private static final int LAMP_CATEGORY_ID = 28107;
-    private static final int CLOTHING_CATEGORY_ID = 10203;
 
     @Test
     public void getFashionPostsTest() throws Exception {
@@ -55,7 +55,7 @@ public class RestCallServiceTest {
     }
 
     private void getProductsTest(int categoryId) throws java.io.IOException {
-        Call<GetProductsResponse> call = RestCallService.getAPIInterface().getProductsForCategory(categoryId, PAGE_ITEMS);
+        Call<GetProductsResponse> call = RestCallService.getAPIInterface().getProductsForCategory(categoryId, PRODUCTS_PAGE_ITEMS);
 
         Response<GetProductsResponse> response = call.execute();
 
@@ -69,11 +69,11 @@ public class RestCallServiceTest {
         Product[] products = body.getProducts();
         assertNotNull(products);
 
-        assertTrue(products.length == PAGE_ITEMS);
+        assertTrue(products.length == PRODUCTS_PAGE_ITEMS);
     }
 
     private void getPostsTest(String categoryName) throws java.io.IOException {
-        Call<GetPostsResponse> call = RestCallService.getAPIInterface().getPostsForCategory(categoryName, PAGE_ITEMS);
+        Call<GetPostsResponse> call = RestCallService.getAPIInterface().getPostsForCategory(categoryName, POSTS_PAGE_ITEMS);
 
         Response<GetPostsResponse> response = call.execute();
 
@@ -87,6 +87,6 @@ public class RestCallServiceTest {
         Post[] posts = body.getPosts();
         assertNotNull(posts);
 
-        assertTrue(posts.length == PAGE_ITEMS);
+        assertTrue(posts.length == POSTS_PAGE_ITEMS);
     }
 }
