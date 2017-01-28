@@ -10,6 +10,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "X_LOCALE", "\"de_DE\"";
+        buildConfigField "String", "X_API_KEY", "\"C6490912AB3211E680F576304DEC7EB7\"";
+        buildConfigField "String", "SERVER_IP", "\"https://api.stylight.com\"";
+        buildConfigField "String", "SERVER_API_EXTENSION", "\"/rest/\"";
     }
     buildTypes {
         release {
@@ -26,5 +31,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     testCompile 'junit:junit:4.12'
 }
