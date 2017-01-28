@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProductScroller</string>
+    <string name="product_price_with_currency_symbol">%1$s %2$s</string>
 </resources>

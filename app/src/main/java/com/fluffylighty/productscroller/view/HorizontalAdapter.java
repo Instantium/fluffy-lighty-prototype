@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fluffylighty.productscroller.R;
+import com.fluffylighty.productscroller.Utilities.Utilities;
 import com.fluffylighty.productscroller.model.Product;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -47,10 +48,18 @@ public class HorizontalAdapter extends ArrayAdapter<Product> {
 
         if (currentItem != null) {
             holder.productNameTextView.setText(currentItem.getName());
-            holder.productPricingTextView.setText(currentItem.getPrice() + "");
 
+            String currencySymbol = currentItem.getCurrency().getSymbol();
+            String formattedProductPrice = Utilities.formatPrice(currentItem.getPrice());
+
+            String priceTag = getContext().getString(R.string.product_price_with_currency_symbol, formattedProductPrice, currencySymbol);
+
+            holder.productPricingTextView.setText(priceTag);
+
+            //TODO check if image is available and use a fallback otherwise
             String imageUrl = currentItem.getImages()[0].getUrl();
 
+            //TODO show placeholder image
             ImageLoader.getInstance().displayImage(imageUrl, holder.productImageView);
         }
 
