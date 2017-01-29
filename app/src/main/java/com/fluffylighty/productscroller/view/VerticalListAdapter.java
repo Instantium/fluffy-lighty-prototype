@@ -1,8 +1,10 @@
 package com.fluffylighty.productscroller.view;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,8 +147,15 @@ public class VerticalListAdapter extends BaseAdapter {
         String colorString = category.getColor();
         holder.categoryNameTextView.setTextColor(Utilities.parseColorString(colorString));
 
-        holder.titleTextView.setText(post.getTitle());
+        Spanned formattedText;
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            formattedText = Html.fromHtml(post.getTitle(), 0);
+        } else {
+            formattedText = Html.fromHtml(post.getTitle());
+        }
+
+        holder.titleTextView.setText(formattedText);
 
         holder.imageView.setImageResource(R.drawable.placeholder_drawable);
         ImageLoader.getInstance().displayImage(post.getTeaserImage(), holder.imageView);
