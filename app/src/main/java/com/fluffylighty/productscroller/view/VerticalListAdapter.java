@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class VerticalListAdapter extends BaseAdapter {
 
+    private static final int SECTION_HEADER_VIEW_TYPE = 2;
     private static final int PRODUCT_VIEW_TYPE = 1;
     private static final int POST_VIEW_TYPE = 0;
     private final Context context;
@@ -39,7 +40,9 @@ public class VerticalListAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return 2;
+
+        //There are the same amount of ViewTypes as there are WrapperTypes
+        return VerticalListItemWrapper.WrapperType.values().length;
     }
 
     @Override
@@ -47,12 +50,8 @@ public class VerticalListAdapter extends BaseAdapter {
 
         VerticalListItemWrapper item = getItem(position);
 
-        if (item.isPost()) {
-
-            return POST_VIEW_TYPE;
-        } else {
-            return PRODUCT_VIEW_TYPE;
-        }
+        //Since there are as many ViewTypes as Enum-constants the ordinal is enough to identify the ViewType.
+        return item.getWrapperType().ordinal();
     }
 
     @Override
@@ -76,12 +75,42 @@ public class VerticalListAdapter extends BaseAdapter {
 
         VerticalListItemWrapper currentItem = getItem(position);
 
-        if (currentItem.isPost()) {
-
-            convertView = getPostView(currentItem, convertView);
-        } else {
-            convertView = getProductView(currentItem, convertView);
+        switch (currentItem.getWrapperType()) {
+            case POST:
+                convertView = getPostView(currentItem, convertView);
+                break;
+            case PRODUCT_LIST:
+                convertView = getProductView(currentItem, convertView);
+                break;
+            default:
+            case SECTION_HEADER:
+                convertView = getSectionHeaderView(currentItem, convertView);
+                break;
         }
+
+        return convertView;
+    }
+
+    @NonNull
+    private View getSectionHeaderView(VerticalListItemWrapper currentItem, View convertView) {
+
+        SectionHeaderViewHolder holder;
+        if (convertView == null) {
+
+            convertView = LayoutInflater.from(context).inflate(R.layout.vertical_listview_section_header_list_item, null);
+
+            holder = new SectionHeaderViewHolder();
+
+            holder.titleTextView = (TextView) convertView.findViewById(R.id.section_header_title_text_view);
+            holder.subtitleTextView = (TextView) convertView.findViewById(R.id.section_header_subtitle_text_view);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (SectionHeaderViewHolder) convertView.getTag();
+        }
+
+        holder.titleTextView.setText(currentItem.getSectionHeaderTitleResId());
+        holder.subtitleTextView.setText(currentItem.getSectionHeaderSubtitleResId());
 
         return convertView;
     }
@@ -142,6 +171,11 @@ public class VerticalListAdapter extends BaseAdapter {
         holder.horizontalAdapter.notifyDataSetChanged();
 
         return convertView;
+    }
+
+    private class SectionHeaderViewHolder {
+        TextView titleTextView;
+        TextView subtitleTextView;
     }
 
     private class ProductViewHolder {

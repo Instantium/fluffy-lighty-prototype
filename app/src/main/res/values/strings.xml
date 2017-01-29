@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">ProductScroller</string>
     <string name="product_price_with_currency_symbol">%1$s %2$s</string>
+
+    <string name="up_to_date">The latest lifestyle news</string>
+    <string name="trending">New and trending products</string>
+
+    <string name="clothing_products_section_header_title">Check these out</string>
+    <string name="clothing_products_section_header_subtitle">@string/trending</string>
+    <string name="lamp_products_section_header_title">The coolest lamps</string>
+    <string name="lamp_products_section_header_subtitle">@string/trending</string>
+    <string name="fashion_posts_section_header_title">The latest fashion news</string>
+    <string name="fashion_posts_section_header_subtitle">@string/up_to_date</string>
+    <string name="lifestyle_posts_section_header_title">The latest lifestyle news</string>
+    <string name="lifestyle_posts_section_header_subtitle">@string/up_to_date</string>
 </resources>

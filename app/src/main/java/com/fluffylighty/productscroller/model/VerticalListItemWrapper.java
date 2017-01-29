@@ -7,18 +7,33 @@ import java.util.List;
  */
 public class VerticalListItemWrapper {
 
-    private final boolean isPost;
+    private final WrapperType wrapperType;
+    private int sectionHeaderTitleResId;
+    private int sectionHeaderSubtitleResId;
     private Post post;
     private List<Product> products;
 
+    public enum WrapperType {
+        POST,
+        PRODUCT_LIST,
+        SECTION_HEADER
+    }
+
     public VerticalListItemWrapper(Post post) {
         this.post = post;
-        isPost = true;
+        wrapperType = WrapperType.POST;
     }
 
     public VerticalListItemWrapper(List<Product> products) {
         this.products = products;
-        isPost = false;
+        wrapperType = WrapperType.PRODUCT_LIST;
+    }
+
+    public VerticalListItemWrapper(int sectionHeaderTitleResId, int sectionHeaderSubtitleResId) {
+
+        this.sectionHeaderTitleResId = sectionHeaderTitleResId;
+        this.sectionHeaderSubtitleResId = sectionHeaderSubtitleResId;
+        wrapperType = WrapperType.SECTION_HEADER;
     }
 
     public List<Product> getProducts() {
@@ -29,7 +44,15 @@ public class VerticalListItemWrapper {
         return post;
     }
 
-    public boolean isPost() {
-        return isPost;
+    public WrapperType getWrapperType() {
+        return wrapperType;
+    }
+
+    public int getSectionHeaderTitleResId() {
+        return sectionHeaderTitleResId;
+    }
+
+    public int getSectionHeaderSubtitleResId() {
+        return sectionHeaderSubtitleResId;
     }
 }

@@ -28,16 +28,40 @@ public class MainActivity extends AppCompatActivity {
     private List<Post> lifestylePostList = new ArrayList<>();
     private List<Product> clothingProductList = new ArrayList<>();
     private List<Product> lampProductList = new ArrayList<>();
+    private VerticalListItemWrapper clothingProductsSectionHeader;
+    private VerticalListItemWrapper lampProductsSectionHeader;
+    private VerticalListItemWrapper fashionPostsSectionHeader;
+    private VerticalListItemWrapper lifestylePostsSectionHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createSectionHeader();
+
         ListView verticalListView = (ListView) findViewById(R.id.vertical_listview);
 
         verticalAdapter = new VerticalListAdapter(this, verticalListItemWrapperList);
         verticalListView.setAdapter(verticalAdapter);
+    }
+
+    private void createSectionHeader() {
+        clothingProductsSectionHeader = new VerticalListItemWrapper(
+                R.string.clothing_products_section_header_title,
+                R.string.clothing_products_section_header_subtitle);
+
+        lampProductsSectionHeader = new VerticalListItemWrapper(
+                R.string.lamp_products_section_header_title,
+                R.string.lamp_products_section_header_subtitle);
+
+        fashionPostsSectionHeader = new VerticalListItemWrapper(
+                R.string.fashion_posts_section_header_title,
+                R.string.fashion_posts_section_header_subtitle);
+
+        lifestylePostsSectionHeader = new VerticalListItemWrapper(
+                R.string.lifestyle_posts_section_header_title,
+                R.string.lifestyle_posts_section_header_subtitle);
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -78,18 +102,35 @@ public class MainActivity extends AppCompatActivity {
 
         verticalListItemWrapperList.clear();
 
-        verticalListItemWrapperList.add(new VerticalListItemWrapper(clothingProductList));
+        if (clothingProductList.size() > 0) {
 
-        for (Post post : fashionPostList) {
-
-            verticalListItemWrapperList.add(new VerticalListItemWrapper(post));
+            verticalListItemWrapperList.add(clothingProductsSectionHeader);
+            verticalListItemWrapperList.add(new VerticalListItemWrapper(clothingProductList));
         }
 
-        verticalListItemWrapperList.add(new VerticalListItemWrapper(lampProductList));
+        if (fashionPostList.size() > 0) {
 
-        for (Post post : lifestylePostList) {
+            verticalListItemWrapperList.add(fashionPostsSectionHeader);
+            for (Post post : fashionPostList) {
 
-            verticalListItemWrapperList.add(new VerticalListItemWrapper(post));
+                verticalListItemWrapperList.add(new VerticalListItemWrapper(post));
+            }
+        }
+
+        if (lampProductList.size() > 0) {
+
+            verticalListItemWrapperList.add(lampProductsSectionHeader);
+            verticalListItemWrapperList.add(new VerticalListItemWrapper(lampProductList));
+        }
+
+        if (lifestylePostList.size() > 0) {
+
+            verticalListItemWrapperList.add(lifestylePostsSectionHeader);
+
+            for (Post post : lifestylePostList) {
+
+                verticalListItemWrapperList.add(new VerticalListItemWrapper(post));
+            }
         }
 
         verticalAdapter.notifyDataSetChanged();
