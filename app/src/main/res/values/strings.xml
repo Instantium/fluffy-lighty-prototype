@@ -2,7 +2,7 @@
     <string name="app_name">ProductScroller</string>
     <string name="product_price_with_currency_symbol">%1$s %2$s</string>
 
-    <string name="up_to_date">The latest lifestyle news</string>
+    <string name="up_to_date">Get up to date</string>
     <string name="trending">New and trending products</string>
 
     <string name="clothing_products_section_header_title">Check these out</string>
