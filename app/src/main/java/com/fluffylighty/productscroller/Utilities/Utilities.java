@@ -14,7 +14,11 @@ public class Utilities {
 
     public static String formatPrice(float price) {
 
-        return NumberFormat.getInstance().format(price);
+        NumberFormat numberFormat = NumberFormat.getInstance();
+
+        numberFormat.setMinimumFractionDigits(2);
+
+        return numberFormat.format(price);
     }
 
     public static int parseColorString(String colorString) {

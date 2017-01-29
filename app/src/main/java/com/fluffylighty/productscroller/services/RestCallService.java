@@ -1,12 +1,14 @@
 package com.fluffylighty.productscroller.services;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.fluffylighty.productscroller.BuildConfig;
 import com.fluffylighty.productscroller.interfaces.ApiInterface;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.Currency;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -74,6 +76,7 @@ public class RestCallService {
             @Override
             public void onFailure(Call<T> call, Throwable t) {
 
+                Log.e(LOG_TAG, "onFailure: ", t);
             }
         });
     }
