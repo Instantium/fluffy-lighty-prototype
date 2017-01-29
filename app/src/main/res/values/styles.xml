@@ -13,4 +13,13 @@
     <style name="MyTextViewStyle" parent="android:Widget.TextView">
         <item name="android:textColor">@color/regular_text</item>
     </style>
+
+    <style name="title_text_appearance">
+        <item name="android:textSize">@dimen/title_text_size</item>
+    </style>
+
+    <style name="subtitle_text_appearance">
+        <item name="android:textSize">@dimen/subtitle_text_size</item>
+    </style>
+
 </resources>

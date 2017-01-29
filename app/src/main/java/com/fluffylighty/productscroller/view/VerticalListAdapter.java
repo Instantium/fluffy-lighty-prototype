@@ -1,6 +1,7 @@
 package com.fluffylighty.productscroller.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -163,6 +164,7 @@ public class VerticalListAdapter extends BaseAdapter {
 
             holder = new ProductViewHolder();
             TwoWayView horizontalListView = (TwoWayView) convertView.findViewById(R.id.horizontal_listview);
+
             holder.productList = new ArrayList<>();
             holder.horizontalAdapter = new HorizontalAdapter(context, holder.productList);
             horizontalListView.setAdapter(holder.horizontalAdapter);
