@@ -5,4 +5,5 @@
     <dimen name="horizontal_list_item_width">100dp</dimen>
     <dimen name="horizontal_list_item_height">400dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
 </resources>
