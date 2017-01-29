@@ -5,9 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.fluffylighty.productscroller.R;
-import com.fluffylighty.productscroller.Utilities.Constants;
-import com.fluffylighty.productscroller.events.PostListUpdatedEvent;
-import com.fluffylighty.productscroller.events.ProductListUpdatedEvent;
+import com.fluffylighty.productscroller.events.PostListsUpdatedEvent;
+import com.fluffylighty.productscroller.events.ProductListsUpdatedEvent;
 import com.fluffylighty.productscroller.model.Post;
 import com.fluffylighty.productscroller.model.Product;
 import com.fluffylighty.productscroller.model.VerticalListItemWrapper;
@@ -17,7 +16,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,35 +64,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(ProductListUpdatedEvent productListUpdatedEvent) {
+    public void onMessageEvent(ProductListsUpdatedEvent productListsUpdatedEvent) {
 
-        List<Product> listToAddProductsTo;
-        if (productListUpdatedEvent.getCategoryId() == Constants.CLOTHING_CATEGORY_ID) {
-
-            listToAddProductsTo = this.clothingProductList;
-        } else {
-
-            listToAddProductsTo = this.lampProductList;
-        }
-
-        listToAddProductsTo.clear();
-        listToAddProductsTo.addAll(Arrays.asList(productListUpdatedEvent.getProducts()));
+        this.clothingProductList = productListsUpdatedEvent.getClothingProductList();
+        this.lampProductList = productListsUpdatedEvent.getLampProductList();
 
         updateWrapperList();
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(PostListUpdatedEvent postListUpdatedEvent) {
+    public void onMessageEvent(PostListsUpdatedEvent postListsUpdatedEvent) {
 
-        List<Post> listToAddPostsTo;
-        if (postListUpdatedEvent.getCategoryName().equals(Constants.FASHION_CATEGORY_NAME)) {
-            listToAddPostsTo = this.fashionPostList;
-        } else {
-            listToAddPostsTo = this.lifestylePostList;
-        }
+        this.fashionPostList = postListsUpdatedEvent.getFashionPostList();
+        this.lifestylePostList = postListsUpdatedEvent.getLifestylePostList();
 
-        listToAddPostsTo.clear();
-        listToAddPostsTo.addAll(Arrays.asList(postListUpdatedEvent.getPosts()));
 
         updateWrapperList();
     }
