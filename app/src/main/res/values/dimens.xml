@@ -21,4 +21,6 @@
     <dimen name="product_card_padding_bottom">10dp</dimen>
     <dimen name="main_padding">8dp</dimen>
     <dimen name="post_category_name_margin">10dp</dimen>
+    <dimen name="section_header_vertical_padding">20dp</dimen>
+    <dimen name="section_header_horizontal_padding">14dp</dimen>
 </resources>

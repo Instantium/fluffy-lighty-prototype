@@ -3,10 +3,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:paddingBottom="20dp"
-              android:paddingEnd="14dp"
-              android:paddingStart="14dp"
-              android:paddingTop="20dp">
+              android:paddingBottom="@dimen/section_header_vertical_padding"
+              android:paddingEnd="@dimen/section_header_horizontal_padding"
+              android:paddingRight="@dimen/section_header_horizontal_padding"
+              android:paddingStart="@dimen/section_header_horizontal_padding"
+              android:paddingLeft="@dimen/section_header_horizontal_padding"
+              android:paddingTop="@dimen/section_header_vertical_padding">
 
     <TextView
         android:id="@+id/section_header_title_text_view"

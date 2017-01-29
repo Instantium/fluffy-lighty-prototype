@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         createSectionHeader();
 
         ListView verticalListView = (ListView) findViewById(R.id.vertical_listview);
+        verticalListView.setDivider(null);
 
         verticalAdapter = new VerticalListAdapter(this, verticalListItemWrapperList);
         verticalListView.setAdapter(verticalAdapter);
