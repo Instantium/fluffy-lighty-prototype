@@ -57,10 +57,10 @@ public class HorizontalAdapter extends ArrayAdapter<Product> {
 
             holder.productPricingTextView.setText(priceTag);
 
+            holder.productImageView.setImageResource(R.drawable.placeholder_drawable);
             String imageUrl = getImageUrl(currentItem.getImages());
 
             if (imageUrl != null) {
-                //TODO show placeholder image
                 ImageLoader.getInstance().displayImage(imageUrl, holder.productImageView);
             }
         }

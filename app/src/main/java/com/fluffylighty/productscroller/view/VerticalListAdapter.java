@@ -147,7 +147,7 @@ public class VerticalListAdapter extends BaseAdapter {
         holder.titleTextView.setText(post.getTitle());
 
 
-        //TODO show placeholder image
+        holder.imageView.setImageResource(R.drawable.placeholder_drawable);
         ImageLoader.getInstance().displayImage(post.getTeaserImage(), holder.imageView);
 
         return convertView;

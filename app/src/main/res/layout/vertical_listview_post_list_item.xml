@@ -9,18 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="@drawable/card_background"
-        android:elevation="5dp">
+        android:elevation="@dimen/card_elevation">
 
         <com.joooonho.SelectableRoundedImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/post_list_item_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/post_list_item_image_width"
+            android:layout_height="@dimen/post_list_item_image_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             app:sriv_left_bottom_corner_radius="@dimen/card_corner_radius"
             app:sriv_left_top_corner_radius="@dimen/card_corner_radius"/>
 

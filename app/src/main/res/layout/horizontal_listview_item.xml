@@ -4,8 +4,8 @@
               android:layout_height="wrap_content">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="@dimen/horizontal_list_item_width"
-                  android:layout_height="@dimen/horizontal_list_item_height"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
                   android:layout_margin="5dp"
                   android:background="@drawable/card_background"
                   android:elevation="@dimen/card_elevation"
@@ -14,20 +14,22 @@
         <com.joooonho.SelectableRoundedImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/horizontal_listview_list_item_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
+            android:layout_width="@dimen/product_image_width"
+            android:layout_height="@dimen/product_image_height"
+            android:adjustViewBounds="true"
             app:sriv_left_top_corner_radius="@dimen/card_corner_radius"
             app:sriv_right_top_corner_radius="@dimen/card_corner_radius"/>
 
         <TextView
             android:id="@+id/horizontal_listview_list_item_name_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/horizontal_listview_list_item_pricing_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 </LinearLayout>

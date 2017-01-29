@@ -8,4 +8,5 @@
     <color name="card_background">#FFF</color>
     <color name="window_background">#e0e0e0</color>
     <color name="regular_text">#000</color>
+    <color name="dark_grey">#dedede</color>
 </resources>
