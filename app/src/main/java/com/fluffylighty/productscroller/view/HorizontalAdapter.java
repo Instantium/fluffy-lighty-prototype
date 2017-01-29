@@ -13,6 +13,7 @@ import com.fluffylighty.productscroller.R;
 import com.fluffylighty.productscroller.Utilities.Utilities;
 import com.fluffylighty.productscroller.model.ImageInfo;
 import com.fluffylighty.productscroller.model.Product;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -57,7 +58,6 @@ public class HorizontalAdapter extends ArrayAdapter<Product> {
 
             holder.productPricingTextView.setText(priceTag);
 
-            holder.productImageView.setImageResource(R.drawable.placeholder_drawable);
             String imageUrl = getImageUrl(currentItem.getImages());
 
             if (imageUrl != null) {
