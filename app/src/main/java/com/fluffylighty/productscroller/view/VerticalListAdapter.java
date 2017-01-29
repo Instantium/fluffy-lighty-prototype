@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fluffylighty.productscroller.R;
+import com.fluffylighty.productscroller.Utilities.Utilities;
 import com.fluffylighty.productscroller.model.Post;
+import com.fluffylighty.productscroller.model.PostCategory;
 import com.fluffylighty.productscroller.model.Product;
 import com.fluffylighty.productscroller.model.VerticalListItemWrapper;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -136,8 +138,12 @@ public class VerticalListAdapter extends BaseAdapter {
 
         Post post = currentItem.getPost();
 
-        //TODO display categoryName
-        holder.categoryNameTextView.setText(post.getTitle());
+        PostCategory category = post.getCategory();
+
+        holder.categoryNameTextView.setText(category.getName());
+        String colorString = category.getColor();
+        holder.categoryNameTextView.setTextColor(Utilities.parseColorString(colorString));
+
         holder.titleTextView.setText(post.getTitle());
 
 
